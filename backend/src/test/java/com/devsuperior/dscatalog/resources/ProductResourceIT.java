@@ -41,13 +41,13 @@ public class ProductResourceIT {
 	
 	@Test
 	public void findAllShouldReturnSortedPageWhenSortByName() throws Exception {
-		mockMvc.perform(get("/products?page=0&size=12&sort=name,asc")
+		mockMvc.perform(get("/products?page=0&size=3&sort=name,asc")
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.totalElements").value(countTotalProducts))
 		.andExpect(jsonPath("$.content").exists())
-		.andExpect(jsonPath("$.content[0]").value("Macbook Pro"))
-		.andExpect(jsonPath("$.content[1]").value("PC Gamer"));
+		.andExpect(jsonPath("$.content[0].name").value("Macbook Pro"))
+		.andExpect(jsonPath("$.content[1].name").value("PC Gamer"));
 	}
 	
 	@Test
